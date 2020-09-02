@@ -23,6 +23,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    addGrandchild: Boolean!
     removeGrandchild: Boolean!
   }
 
@@ -40,7 +41,8 @@ const resolvers = {
     }),
   },
   Mutation: {
-    removeGrandchild: () => true
+    removeGrandchild: () => true,
+    addGrandchild: () => true
   }
 };
 

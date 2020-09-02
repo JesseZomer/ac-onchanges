@@ -1,3 +1,3 @@
-<p>child: {{child.name}}</p>
+<p>child: {{child.name}} <span class="add" (click)="addGrandchild()">+</span></p>
 <app-grandchild *ngFor="let grandchild of child.grandChildren; trackBy:trackById" [grandchild]="grandchild">
 </app-grandchild>
