@@ -1,0 +1,3 @@
+<p>child: {{child.name}}</p>
+<app-grandchild *ngFor="let grandchild of child.grandChildren; trackBy:trackById" [grandchild]="grandchild">
+</app-grandchild>

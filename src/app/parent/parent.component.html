@@ -1,0 +1,2 @@
+<p>Parent Component</p>
+<app-child *ngFor="let child of (parent$ | async)?.children" [child]="child"></app-child>
