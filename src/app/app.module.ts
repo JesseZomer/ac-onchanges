@@ -39,7 +39,7 @@ export class AppModule {
 
     apollo.create({
       link,
-      cache: new InMemoryCache(),
+      cache: new InMemoryCache({ freezeResults: true }),
       assumeImmutableResults: true
     });
   }
