@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Child, Parent, GrandChild } from '../models';
-import { Apollo, gql } from 'apollo-angular';
-import { GET_PARENT } from '../parent/parent.component';
-import { mod, all, matching } from 'shades';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { matching, mod } from 'shades';
+
+import { Child, GrandChild, Parent, GET_PARENT } from '../models';
 
 @Component({
   selector: 'app-child',
@@ -37,7 +38,11 @@ export class ChildComponent implements OnInit, OnChanges {
 
         parent = mod('parent', 'children', matching({ name: this.child.name }), 'grandChildren')
           ((gc: GrandChild[]) => {
-            const newGrandChild = { id: `${this.child.name}-${Number(gc[gc.length - 1].name) + 1}`, name: Number(gc[gc.length - 1].name) + 1 };
+            const newGrandChild = {
+              __typename: 'GrandChild',
+              id: `${this.child.name}-${Number(gc[gc.length - 1].name) + 1}`,
+              name: Number(gc[gc.length - 1].name) + 1
+            };
             return [...gc, newGrandChild];
           })(parent);
 

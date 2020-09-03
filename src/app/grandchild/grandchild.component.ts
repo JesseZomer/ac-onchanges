@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, HostListener, OnChanges, SimpleChanges } from '@angular/core';
-import { GrandChild, Child, Parent } from '../models';
-import { Apollo, gql } from 'apollo-angular';
-import { GET_PARENT } from '../parent/parent.component';
-import { mod, all, matching } from 'shades';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { all, mod } from 'shades';
+
+import { GrandChild, Parent, GET_PARENT } from '../models';
 
 @Component({
   selector: 'app-grandchild',
@@ -39,12 +40,6 @@ export class GrandchildComponent implements OnInit, OnChanges {
         // matching({ grandChildren: (gc: []) => gc.some((_gc: GrandChild) => _gc.id === this.grandchild.id) })
         parent = mod('parent', 'children', all(),
           'grandChildren')((gc: GrandChild[]) => gc.filter((_gc) => _gc.id !== this.grandchild.id))(parent);
-
-        // parent = {
-        //   parent: {
-        //     ...parent,
-        //     children: [...parent.parent.children]
-        // };
 
         cache.writeQuery({
           query: GET_PARENT,

@@ -1,24 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Parent } from './../models';
-
-export const GET_PARENT = gql`
-  {
-    parent {
-        id
-        title
-        children {
-          name
-          grandChildren {
-            id
-            name
-          }
-        }
-    }
-  }
-`;
+import { Parent, GET_PARENT } from './../models';
+import { Apollo } from 'apollo-angular';
 
 @Component({
   selector: 'app-parent',
